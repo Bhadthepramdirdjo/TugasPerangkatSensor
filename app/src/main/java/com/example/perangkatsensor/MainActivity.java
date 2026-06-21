@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     // --- SensorEventListener Implementation ---
     @Override
     public void onSensorChanged(SensorEvent event) {
+        // Logic Sensor Cahaya
         if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
             float lux = event.values[0];
             tvLightValue.setText(String.format(Locale.getDefault(), "%.1f Lux", lux));
@@ -144,14 +145,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             } else {
                 tvLightStatus.setText("Kondisi: Ruangan Terang");
             }
-        } else if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+        } 
+        // Logic Sensor Accelerometer (Gerak)
+        else if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             float x = event.values[0];
             float y = event.values[1];
             float z = event.values[2];
             
             tvAccelValue.setText(String.format(Locale.getDefault(), "X: %.2f | Y: %.2f | Z: %.2f", x, y, z));
             
-            // Orientation status logic
+            // Logika status orientasi perangkat
             if (Math.abs(x) < 1.5 && Math.abs(y) < 1.5 && Math.abs(z - 9.8) < 1.5) {
                 tvAccelStatus.setText("Status: Perangkat Stabil / Datar");
             } else {
@@ -166,6 +169,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     // --- LocationListener Implementation ---
     @Override
     public void onLocationChanged(@NonNull Location location) {
+        // Logic Sensor GPS (Update Koordinat)
         tvLatitude.setText(String.format(Locale.getDefault(), "Latitude: %.4f", location.getLatitude()));
         tvLongitude.setText(String.format(Locale.getDefault(), "Longitude: %.4f", location.getLongitude()));
         tvLocationStatus.setText("Status: Lokasi Terkunci (GPS)");
